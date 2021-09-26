@@ -21,8 +21,6 @@ create table if not exists user_profile(
     constraint fk_user_id_user_profile foreign key (fk_user_id) references user (user_id)
 );
 
-create index ix_user_profile_fk_user_id on user_profile(fk_user_id);
-
 create table if not exists user_authorization (
     user_authorization_id int primary key auto_increment,
     fk_user_id int not null,
@@ -33,7 +31,6 @@ create table if not exists user_authorization (
     constraint fk_user_id_user_authorization foreign key (fk_user_id) references user (user_id)
 );
 
-create index ix_user_authorization_fk_user_id on user_authorization(fk_user_id);
 create index ix_user_authorization_auth_type on user_authorization(auth_type);
 
 create table if not exists user_role(
@@ -44,7 +41,6 @@ create table if not exists user_role(
     constraint fk_user_id_user_role foreign key (fk_user_id) references user (user_id)
 );
 
-create index ix_user_role_fk_user_id on user_role(fk_user_id);
 create index ix_user_role_role on user_role(role);
 
 create table if not exists user_security(
@@ -58,5 +54,3 @@ create table if not exists user_security(
     constraint uc_fk_user_id_user_security unique (fk_user_id),
     constraint fk_user_id_user_security foreign key (fk_user_id) references user (user_id)
 );
-
-create index ix_user_security_fk_user_id on user_security(fk_user_id);
