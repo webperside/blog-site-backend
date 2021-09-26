@@ -11,8 +11,8 @@ create table if not exists post(
 );
 
 create table if not exists post_comment(
-    post_id int primary key auto_increment,
-    fk_parent_id int null,
+    post_comment_id int primary key auto_increment,
+    parent_id int null,
     fk_post_id int not null,
     fk_user_id int not null,
     comment varchar(3000) not null,
@@ -21,7 +21,7 @@ create table if not exists post_comment(
     constraint fk_user_id_post_comment foreign key (fk_user_id) references user (user_id)   
 );
 
-create index ix_fk_parent_id_post_comment on post_comment(fk_parent_id);
+create index ix_parent_id_post_comment on post_comment(parent_id);
 
 create table if not exists category(
     category_id int primary key auto_increment,
