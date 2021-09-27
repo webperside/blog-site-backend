@@ -11,7 +11,6 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -21,7 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class UserRoleEntity extends BaseEntity implements Serializable{
+public class UserRoleEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 8292178801446048300L;
 
@@ -30,7 +29,7 @@ public class UserRoleEntity extends BaseEntity implements Serializable{
     @Column(name = "user_role_id")
     private Integer id;
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private UserEntity user;
 

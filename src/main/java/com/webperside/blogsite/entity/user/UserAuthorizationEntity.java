@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -29,7 +28,7 @@ public class UserAuthorizationEntity extends BaseEntity implements Serializable 
     @Column(name = "user_authorization_id")
     private Integer id;
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private UserEntity user;
 

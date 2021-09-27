@@ -1,7 +1,6 @@
 package com.webperside.blogsite.entity.post;
 
 import com.webperside.blogsite.entity.base.BaseEntity;
-import com.webperside.blogsite.entity.user.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

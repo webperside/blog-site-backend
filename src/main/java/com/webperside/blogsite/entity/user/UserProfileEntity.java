@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -30,7 +29,7 @@ public class UserProfileEntity extends BaseEntity implements Serializable {
     @Column(name = "user_profile_id")
     private Integer id;
 
-    @OneToOne(fetch = LAZY, cascade = ALL)
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private UserEntity user;
 
