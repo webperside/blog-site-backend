@@ -3,13 +3,16 @@ package com.webperside.blogsite.service.business;
 import com.webperside.blogsite.dto.request.UserRegisterRequest;
 import com.webperside.blogsite.entity.dto.user.UserDTO;
 import com.webperside.blogsite.entity.dto.user.UserProfileDTO;
+import com.webperside.blogsite.entity.dto.user.UserRoleDTO;
 import com.webperside.blogsite.entity.dto.user.UserSecurityDTO;
 import com.webperside.blogsite.enums.common.ErrorEnum;
 import com.webperside.blogsite.enums.user.EmailConfirmation;
 import com.webperside.blogsite.enums.user.Gender;
+import com.webperside.blogsite.enums.user.Role;
 import com.webperside.blogsite.enums.user.UserStatus;
 import com.webperside.blogsite.exception.RestException;
 import com.webperside.blogsite.service.functional.UserProfileService;
+import com.webperside.blogsite.service.functional.UserRoleService;
 import com.webperside.blogsite.service.functional.UserSecurityService;
 import com.webperside.blogsite.service.functional.UserService;
 import com.webperside.blogsite.service.util.MailService;
@@ -27,6 +30,7 @@ public class UserBusinessService {
     private final UserService userService;
     private final UserProfileService userProfileService;
     private final UserSecurityService userSecurityService;
+    private final UserRoleService userRoleService;
 
     private final MailService mailService;
 
@@ -39,8 +43,10 @@ public class UserBusinessService {
 
             UserSecurityDTO security = saveUserSecurity(user);
 
+            saveUserRole(user);
+
             mailService.send(user.getUsername(), security.getEmailConfirmationCode());
-        } catch (DataIntegrityViolationException ex){ // duplicate data
+        } catch (DataIntegrityViolationException ex) { // duplicate data
             RestException.of(ErrorEnum.USER_ALREADY_EXISTS).throwEx();
         }
     }
@@ -74,6 +80,13 @@ public class UserBusinessService {
         userSecurityService.insertOrUpdate(security);
 
         return security;
+    }
+
+    private void saveUserRole(UserDTO user) {
+        userRoleService.insertOrUpdate(UserRoleDTO.builder()
+                .user(user)
+                .role(Role.USER)
+                .build());
     }
 
 }
